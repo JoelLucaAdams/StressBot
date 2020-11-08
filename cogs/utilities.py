@@ -47,7 +47,7 @@ class Utilities(commands.Cog):
     @commands.command()
     async def levels(self, ctx: Context):
         """
-        Gets the queue type and returns a queue
+        Prints out all the users stress levels
         """
         stressTotal = 0
         stressCount = 0
@@ -61,13 +61,18 @@ class Utilities(commands.Cog):
     @commands.command()
     async def level(self, ctx: Context, sLevel: int):
         """
-        change your current stress level
+        change your current stress level e.g. !stress level 10 (range is -100 to 100)
         """
-        for data in stressLevels.values():
-            if data == str(ctx.author):
-                stressLevels[str(ctx.author)] = sLevel
-                await ctx.send(data + " stress level is now " + str(stressLevels[str(ctx.author)]) + "%")
-        stressLevels[str(ctx.author)] = sLevel
-        await ctx.send(str(ctx.author) + " stress level is now " + str(stressLevels[str(ctx.author)]) + "%")
-        with open("stressLevels.json", "w", encoding="utf-8") as file:
-            json.dump(stressLevels, file, ensure_ascii=False, indent=4)
+        if sLevel in range(-100, 100):
+            for data in stressLevels.values():
+                if data == str(ctx.author):
+                    stressLevels[str(ctx.author)] = sLevel
+                    await ctx.send(data + " stress level is now " + str(stressLevels[str(ctx.author)]) + "%")
+                    return
+
+            stressLevels[str(ctx.author)] = sLevel
+            await ctx.send(str(ctx.author) + " stress level is now " + str(stressLevels[str(ctx.author)]) + "%")
+            with open("stressLevels.json", "w", encoding="utf-8") as file:
+                json.dump(stressLevels, file, ensure_ascii=False, indent=4)
+        else:
+            await ctx.send("Stop trying to send numbers out of range you nerd")
