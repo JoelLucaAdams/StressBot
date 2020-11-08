@@ -1,4 +1,3 @@
-import asyncio
 import os
 
 import logging
@@ -7,7 +6,6 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import DefaultHelpCommand
 from dotenv import load_dotenv
-from datetime import datetime
 
 # logs data to the discord.log file, if this file doesn't exist at runtime it is created automatically
 from cogs.utilities import Utilities
@@ -28,7 +26,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 helpCommand = DefaultHelpCommand()
 
 bot = commands.Bot(
-    command_prefix="!stress",
+    command_prefix="!stress ",
     help_command=helpCommand
 )
 
@@ -36,9 +34,6 @@ bot = commands.Bot(
 generalCog = Utilities()
 bot.add_cog(generalCog)
 helpCommand.cog = generalCog
-
-# load other cogs
-bot.load_extension("cogs.queue")
 
 
 @bot.event
@@ -65,7 +60,6 @@ async def on_command_error(ctx, error):
     else:
         await ctx.send('You are missing a required argument.')
         logging.error(error)
-
 
 # Start the bot
 bot.run(TOKEN)

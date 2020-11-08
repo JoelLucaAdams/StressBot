@@ -1,11 +1,29 @@
 from discord.ext import commands
 from discord.ext.commands import Context
+import json
+
+
+def read_json_file(filename):
+    """
+    Reads Json file
+    Parameters:
+        filename (string) : filename of json file to be read
+    Returns:
+        list of people and their stress level
+    """
+    with open(filename, "r", encoding='UTF-8') as read_file:
+        data = json.load(read_file)
+        return data
+
+
+stressLevels = read_json_file("stressLevels.json")
 
 
 class Utilities(commands.Cog):
     """
     General Utilities
     """
+
     @commands.command()
     async def ping(self, ctx: Context):
         """
@@ -27,9 +45,19 @@ class Utilities(commands.Cog):
                                'https://github.com/JoelLucaAdams/StressBot')
 
     @commands.command()
-    async def feedback(self, ctx: Context):
+    async def levels(self):
         """
-        Report feedback or issues with the bot
+        Gets the queue type and returns a queue
         """
-        await ctx.send('If the bot is broken or you have any feedback you\'d like to submit please create a issue on '
-                       'GitHub: https://github.com/JoelLucaAdams/StressBot')
+        for data in stressLevels.values():
+            print(data)
+
+    @commands.command()
+    async def level(self, ctx: Context, stressLevel: str):
+        """
+        change your current stress level
+        """
+        if ctx.author in stressLevel:
+            stressLevels[hash(ctx.author)] = {'stressLevel': stressLevel}
+        else:
+            stressLevel[hash(ctx.author)] = {'stressLevel': stressLevel}
