@@ -16,6 +16,7 @@ def read_json_file(filename):
         return data
 
 
+stressLevels = {}
 stressLevels = read_json_file("stressLevels.json")
 
 
@@ -45,19 +46,21 @@ class Utilities(commands.Cog):
                                'https://github.com/JoelLucaAdams/StressBot')
 
     @commands.command()
-    async def levels(self):
+    async def levels(self, ctx: Context):
         """
         Gets the queue type and returns a queue
         """
-        for data in stressLevels.values():
-            print(data)
+        for data in stressLevels:
+            await ctx.send(data + " stress level is currently " + str(stressLevels[data]) + "%")
 
     @commands.command()
-    async def level(self, ctx: Context, stressLevel: str):
+    async def level(self, ctx: Context, sLevel: str):
         """
         change your current stress level
         """
-        if ctx.author in stressLevel:
-            stressLevels[hash(ctx.author)] = {'stressLevel': stressLevel}
-        else:
-            stressLevel[hash(ctx.author)] = {'stressLevel': stressLevel}
+        for data in stressLevels.values():
+            if stressLevels[str(ctx.author)] == str(ctx.author):
+                stressLevels[str(ctx.author)] = sLevel
+                await ctx.send(data + " stress level is now " + str(stressLevels[str(ctx.author)]) + "%")
+        stressLevels.__setitem__(str(ctx.author), sLevel)
+        await ctx.send(str(ctx.author) + " stress level is now " + str(stressLevels[str(ctx.author)]) + "%")
