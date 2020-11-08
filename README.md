@@ -10,4 +10,4 @@ Users can update their stress levels using the following commands:
 `!stress levels` - print out all users stress levels
 
 ## Preview of the bot working
-![Preview](https://raw.githubusercontent.com/joelucadams/StressBot/Preview.png)
+![Preview](https://raw.githubusercontent.com/JoelLucaAdams/StressBot/main/Preview.png)
