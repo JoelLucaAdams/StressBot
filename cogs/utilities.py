@@ -1,7 +1,6 @@
 from discord.ext import commands
 from discord.ext.commands import Context
 import json
-from collections import defaultdict
 
 
 def read_json_file(filename):
@@ -17,7 +16,6 @@ def read_json_file(filename):
         return data
 
 
-stressLevels = {}
 stressLevels = read_json_file("stressLevels.json")
 
 
@@ -53,11 +51,12 @@ class Utilities(commands.Cog):
         """
         stressTotal = 0
         stressCount = 0
+        longString = ""
         for data in stressLevels:
-            await ctx.send(data + " stress level is currently " + str(stressLevels[data]) + "%")
+            longString += (data + " stress level is currently " + str(stressLevels[data]) + "%\n")
             stressTotal += int(stressLevels[data])
             stressCount += 1
-        await ctx.send("The average stress level is " + str((stressTotal / stressCount)) + "%")
+        await ctx.send(longString + "\nThe average stress level is " + str((stressTotal / stressCount)) + "%")
 
     @commands.command()
     async def level(self, ctx: Context, sLevel: int):
