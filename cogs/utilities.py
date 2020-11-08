@@ -1,6 +1,7 @@
 from discord.ext import commands
 from discord.ext.commands import Context
 import json
+from collections import defaultdict
 
 
 def read_json_file(filename):
@@ -50,17 +51,24 @@ class Utilities(commands.Cog):
         """
         Gets the queue type and returns a queue
         """
+        stressTotal = 0
+        stressCount = 0
         for data in stressLevels:
             await ctx.send(data + " stress level is currently " + str(stressLevels[data]) + "%")
+            stressTotal += int(stressLevels[data])
+            stressCount += 1
+        await ctx.send("The average stress level is " + str((stressTotal / stressCount)) + "%")
 
     @commands.command()
-    async def level(self, ctx: Context, sLevel: str):
+    async def level(self, ctx: Context, sLevel: int):
         """
         change your current stress level
         """
         for data in stressLevels.values():
-            if stressLevels[str(ctx.author)] == str(ctx.author):
+            if data == str(ctx.author):
                 stressLevels[str(ctx.author)] = sLevel
                 await ctx.send(data + " stress level is now " + str(stressLevels[str(ctx.author)]) + "%")
-        stressLevels.__setitem__(str(ctx.author), sLevel)
+        stressLevels[str(ctx.author)] = sLevel
         await ctx.send(str(ctx.author) + " stress level is now " + str(stressLevels[str(ctx.author)]) + "%")
+        with open("stressLevels.json", "w", encoding="utf-8") as file:
+            json.dump(stressLevels, file, ensure_ascii=False, indent=4)
