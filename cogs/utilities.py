@@ -56,14 +56,15 @@ class Utilities(commands.Cog):
             longString += (data + " stress level is currently " + str(stressLevels[data]) + "%\n")
             stressTotal += int(stressLevels[data])
             stressCount += 1
-        await ctx.send(longString + "\nThe average stress level is " + str((stressTotal / stressCount)) + "%")
+        await ctx.send(longString + "\nThe average stress level is " + str(round((stressTotal / stressCount), 2)) + "%")
 
     @commands.command()
     async def level(self, ctx: Context, sLevel: int):
         """
-        change your current stress level e.g. !stress level 10 (range is -100 to 100)
+        change your current stress level e.g.
+        !stress level 10 (range is -100 to 1000)
         """
-        if sLevel in range(-100, 100):
+        if sLevel in range(-100, 1000):
             for data in stressLevels.values():
                 if data == str(ctx.author):
                     stressLevels[str(ctx.author)] = sLevel
