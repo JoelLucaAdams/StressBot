@@ -6,22 +6,8 @@ A discord bot that manages stress levels through users. Created by Joel Adams en
 
 Users can update their stress levels using the following commands:
 
-```
-Bob: !stress 90
-StressBot: Bob's stress is now at 90%
+`!Stress level` - change the users stress level
+`!stress levels` - print out all users stress levels
 
-Scott: !stress 40
-StressBot: Scott's stress is now at 40%
-
-Tom: !stress 0
-StressBot: Tom's stress is now at 0%
-```
-
-Then, when a user prompts the bot, a scenario will play out:
-
-```
-Bill: !stress list
-StressBot: Bob is on the verge of exploding (90% stress)!
-StressBot: Scott is having a good time (40% stress)!
-StressBot: Tom is sitting back laughing (0% stress)!
-```
+## Preview of the bot working
+![Preview](https://raw.githubusercontent.com/joelucadams/StressBot/Preview.png)
