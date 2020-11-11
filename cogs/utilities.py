@@ -62,7 +62,7 @@ class Utilities(commands.Cog):
     async def level(self, ctx: Context, sLevel: int):
         """
         change your current stress level e.g.
-        !stress level 10 (range is -100 to 1000)
+        !stress level 10 (range is -100 to 999)
         """
         if sLevel in range(-100, 1000):
             for data in stressLevels.values():
