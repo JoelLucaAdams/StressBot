@@ -1,6 +1,7 @@
 from discord.ext import commands
 from discord.ext.commands import Context
 import json
+import time
 
 
 def read_json_file(filename):
@@ -35,7 +36,6 @@ class Utilities(commands.Cog):
         """
         Status check
         """
-        import time
         start_time = time.time()
         message = await ctx.send('pong. `DWSPz latency: ' + str(round(ctx.bot.latency * 1000)) + 'ms`')
         end_time = time.time()
