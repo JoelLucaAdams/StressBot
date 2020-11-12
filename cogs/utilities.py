@@ -76,9 +76,10 @@ class Utilities(commands.Cog):
                 previous = str(stressLevels[name])
                 stressLevels[name] = sLevel
                 await ctx.send(name + " stress level is now " + str(stressLevels[name]) + "% (was " + previous + "%)")
+            else:
+                stressLevels[name] = sLevel
+                await ctx.send(name + " stress level is now " + str(stressLevels[name]) + "%")
 
-            stressLevels[name] = sLevel
-            await ctx.send(name + " stress level is now " + str(stressLevels[name]) + "%")
             with open("stressLevels.json", "w", encoding="utf-8") as file:
                 json.dump(stressLevels, file, ensure_ascii=False, indent=4)
         else:
