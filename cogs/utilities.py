@@ -55,14 +55,16 @@ class Utilities(commands.Cog):
         """
         Prints out all the users stress levels
         """
-        stressTotal = 0
-        stressCount = 0
-        longString = ""
+        stress_level_total = 0
+        stress_count = 0
+        stress_string = ""
+
         for data in stressLevels:
-            longString += (data + " stress level is currently " + str(stressLevels[data]) + "%\n")
-            stressTotal += int(stressLevels[data])
-            stressCount += 1
-        await ctx.send(longString + "\nThe average stress level is " + str(round((stressTotal / stressCount), 2)) + "%")
+            stress_string += (data + " stress level is currently " + str(stressLevels[data]) + "%\n")
+            stress_level_total += int(stressLevels[data])
+            stress_count += 1
+        await ctx.send(stress_string + "\nThe average stress level is " +
+                       str(round((stress_level_total / stress_count), 2)) + "%")
 
     @commands.command()
     async def level(self, ctx: Context, sLevel: int):
