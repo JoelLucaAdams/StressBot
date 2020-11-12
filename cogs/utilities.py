@@ -11,9 +11,15 @@ def read_json_file(filename):
     Returns:
         list of people and their stress level
     """
-    with open(filename, "r", encoding='UTF-8') as read_file:
-        data = json.load(read_file)
-        return data
+    try:
+        with open(filename, "r", encoding='UTF-8') as read_file:
+            data = json.load(read_file)
+            return data
+    except IOError:
+        with open(filename, "w+", encoding='UTF-8') as read_file:
+            read_file.write("{}")
+            data = json.load(read_file)
+            return data
 
 
 stressLevels = read_json_file("stressLevels.json")
@@ -64,18 +70,17 @@ class Utilities(commands.Cog):
         change your current stress level e.g.
         !stress level 10 (range is -100 to 999)
         """
+        name = str(ctx.author)
         if sLevel in range(-100, 1000):
-            for data in stressLevels:
-                if data == str(ctx.author):
-                    previous = str(stressLevels[str(ctx.author)])
-                    stressLevels[str(ctx.author)] = sLevel
-                    await ctx.send(data + " stress level is now " + str(stressLevels[str(ctx.author)]) + "% (was " + previous + "%)")
-                    with open("stressLevels.json", "w", encoding="utf-8") as file:
-                        json.dump(stressLevels, file, ensure_ascii=False, indent=4)
-                    return
+            if name in stressLevels:
+                previous = str(stressLevels[name])
+                stressLevels[name] = sLevel
+                await ctx.send(name + " stress level is now " + str(stressLevels[name]) + "% (was " + previous + "%)")
+                with open("stressLevels.json", "w", encoding="utf-8") as file:
+                    json.dump(stressLevels, file, ensure_ascii=False, indent=4)
 
-            stressLevels[str(ctx.author)] = sLevel
-            await ctx.send(str(ctx.author) + " stress level is now " + str(stressLevels[str(ctx.author)]) + "%")
+            stressLevels[name] = sLevel
+            await ctx.send(name + " stress level is now " + str(stressLevels[name]) + "%")
             with open("stressLevels.json", "w", encoding="utf-8") as file:
                 json.dump(stressLevels, file, ensure_ascii=False, indent=4)
         else:
