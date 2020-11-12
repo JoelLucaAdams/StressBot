@@ -67,8 +67,9 @@ class Utilities(commands.Cog):
         if sLevel in range(-100, 1000):
             for data in stressLevels.values():
                 if data == str(ctx.author):
+                    previous = str(stressLevels[str(ctx.author)])
                     stressLevels[str(ctx.author)] = sLevel
-                    await ctx.send(data + " stress level is now " + str(stressLevels[str(ctx.author)]) + "%")
+                    await ctx.send(data + " stress level is now " + str(stressLevels[str(ctx.author)]) + "% (was " + previous + "%)")
                     return
 
             stressLevels[str(ctx.author)] = sLevel
