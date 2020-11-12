@@ -65,11 +65,13 @@ class Utilities(commands.Cog):
         !stress level 10 (range is -100 to 999)
         """
         if sLevel in range(-100, 1000):
-            for data in stressLevels.values():
+            for data in stressLevels:
                 if data == str(ctx.author):
                     previous = str(stressLevels[str(ctx.author)])
                     stressLevels[str(ctx.author)] = sLevel
                     await ctx.send(data + " stress level is now " + str(stressLevels[str(ctx.author)]) + "% (was " + previous + "%)")
+                    with open("stressLevels.json", "w", encoding="utf-8") as file:
+                        json.dump(stressLevels, file, ensure_ascii=False, indent=4)
                     return
 
             stressLevels[str(ctx.author)] = sLevel
