@@ -120,7 +120,7 @@ class Utilities(commands.Cog):
     @commands.command(alias=['yeet'])
     async def begone(self, ctx: Context):
         """
-        Sets the users stress level to zero
+        Sets the users stress level to 0%
         Super secret alias: yeet
         """
         name = str(ctx.author)
@@ -133,7 +133,7 @@ class Utilities(commands.Cog):
     @commands.command(alias=['reeee'])
     async def maximus(self, ctx: Context):
         """
-        Sets the users stress level to zero
+        Sets the users stress level to 999%
         Super secret alais: reeee
         """
         name = str(ctx.author)
