@@ -126,8 +126,8 @@ class Utilities(commands.Cog):
         name = str(ctx.author)
         if name in stressLevels:
             stressLevels[name] = 0
-            await ctx.send("Your stress levels have been reduced to ashes")
-            await ctx.send("https://tenor.com/view/sloth-happy-content-slow-smile-gif-4739556")
+            await ctx.send("Your stress levels have been reduced to ashes\n"
+                           "https://tenor.com/view/sloth-happy-content-slow-smile-gif-4739556")
             saveJson()
 
     @commands.command(alias=['reeee'])
@@ -139,6 +139,6 @@ class Utilities(commands.Cog):
         name = str(ctx.author)
         if name in stressLevels:
             stressLevels[name] = 999
-            await ctx.send("*999% stress* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-            await ctx.send("https://tenor.com/view/jim-carrey-court-stressed-ripping-out-hair-annoyed-gif-4968054")
+            await ctx.send("*999% stress* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n"
+                           "https://tenor.com/view/jim-carrey-court-stressed-ripping-out-hair-annoyed-gif-4968054")
             saveJson()
