@@ -1,5 +1,6 @@
 from discord.ext import commands
 from discord.ext.commands import Context
+from discord import Member
 import json
 import time
 
@@ -86,3 +87,14 @@ class Utilities(commands.Cog):
                 json.dump(stressLevels, file, ensure_ascii=False, indent=4)
         else:
             await ctx.send("Stop trying to send numbers out of range you nerd")
+
+    @commands.command()
+    async def get(self, ctx: Context, member: Member):
+        """
+        Parameter is username e.g. !stress get @Joel Adams#4893
+        """
+        member = str(member)
+        if member in stressLevels:
+            await ctx.send(member + '\'s stress level is ' + str(stressLevels[member]))
+        else:
+            await ctx.send('Couldn\'t find any data for ' + member)
