@@ -35,6 +35,14 @@ def printUserLevel(name: str):
     return name + ' stress level is currently ' + str(stressLevels[name]) + '%'
 
 
+def saveJson():
+    """
+    Saves data back to Json file
+    """
+    with open("stressLevels.json", "w", encoding="utf-8") as file:
+        json.dump(stressLevels, file, ensure_ascii=False, indent=4)
+
+
 stressLevels = read_json_file("stressLevels.json")
 
 
@@ -94,8 +102,7 @@ class Utilities(commands.Cog):
                 stressLevels[name] = sLevel
                 await ctx.send(printUserLevel(name))
 
-            with open("stressLevels.json", "w", encoding="utf-8") as file:
-                json.dump(stressLevels, file, ensure_ascii=False, indent=4)
+            saveJson()
         else:
             await ctx.send("Stop trying to send numbers out of range you nerd")
 
@@ -114,9 +121,24 @@ class Utilities(commands.Cog):
     async def begone(self, ctx: Context):
         """
         Sets the users stress level to zero
+        Super secret alias: yeet
         """
         name = str(ctx.author)
         if name in stressLevels:
             stressLevels[name] = 0
             await ctx.send("Your stress levels have been reduced to ashes")
-            await ctx.send("")
+            await ctx.send("https://tenor.com/view/sloth-happy-content-slow-smile-gif-4739556")
+            saveJson()
+
+    @commands.command(alias=['reeee'])
+    async def maximus(self, ctx: Context):
+        """
+        Sets the users stress level to zero
+        Super secret alais: reeee
+        """
+        name = str(ctx.author)
+        if name in stressLevels:
+            stressLevels[name] = 999
+            await ctx.send("*999% stress* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+            await ctx.send("https://tenor.com/view/jim-carrey-court-stressed-ripping-out-hair-annoyed-gif-4968054")
+            saveJson()
