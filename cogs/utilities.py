@@ -95,6 +95,6 @@ class Utilities(commands.Cog):
         """
         member = str(member)
         if member in stressLevels:
-            await ctx.send(member + '\'s stress level is ' + str(stressLevels[member]))
+            await ctx.send(member + "\'s stress level is " + str(stressLevels[member]) + "%")
         else:
-            await ctx.send('Couldn\'t find any data for ' + member)
+            await ctx.send("Couldn\'t find any data for " + member)
