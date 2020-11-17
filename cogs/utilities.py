@@ -24,6 +24,17 @@ def read_json_file(filename):
             return data
 
 
+def printUserLevel(name: str):
+    """
+    prints the stress level of a user
+    Parameters:
+        name (str) : username
+    Returns:
+        String of the user
+    """
+    return name + ' stress level is currently ' + str(stressLevels[name]) + '%'
+
+
 stressLevels = read_json_file("stressLevels.json")
 
 
@@ -61,7 +72,7 @@ class Utilities(commands.Cog):
         stress_string = ""
 
         for data in stressLevels:
-            stress_string += (data + " stress level is currently " + str(stressLevels[data]) + "%\n")
+            stress_string += (printUserLevel(data) + "\n")
             stress_level_total += int(stressLevels[data])
             stress_count += 1
         await ctx.send(stress_string + "\nThe average stress level is " +
@@ -78,10 +89,10 @@ class Utilities(commands.Cog):
             if name in stressLevels:
                 previous = str(stressLevels[name])
                 stressLevels[name] = sLevel
-                await ctx.send(name + " stress level is now " + str(stressLevels[name]) + "% (was " + previous + "%)")
+                await ctx.send(printUserLevel(name) + " (was " + previous + "%)")
             else:
                 stressLevels[name] = sLevel
-                await ctx.send(name + " stress level is now " + str(stressLevels[name]) + "%")
+                await ctx.send(printUserLevel(name))
 
             with open("stressLevels.json", "w", encoding="utf-8") as file:
                 json.dump(stressLevels, file, ensure_ascii=False, indent=4)
@@ -95,6 +106,17 @@ class Utilities(commands.Cog):
         """
         member = str(member)
         if member in stressLevels:
-            await ctx.send(member + "\'s stress level is " + str(stressLevels[member]) + "%")
+            await ctx.send(printUserLevel(member))
         else:
             await ctx.send("Couldn\'t find any data for " + member)
+
+    @commands.command(alias=['yeet'])
+    async def begone(self, ctx: Context):
+        """
+        Sets the users stress level to zero
+        """
+        name = str(ctx.author)
+        if name in stressLevels:
+            stressLevels[name] = 0
+            await ctx.send("Your stress levels have been reduced to ashes")
+            await ctx.send("")
