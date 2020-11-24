@@ -32,7 +32,7 @@ def printUserLevel(name: str):
     Returns:
         String of the user
     """
-    return name + ' stress level is currently ' + str(stressLevels[name]) + '%'
+    return name + ' stress level is now ' + str(stressLevels[name]) + '%'
 
 
 def saveJson():
