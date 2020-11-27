@@ -87,7 +87,7 @@ class Utilities(commands.Cog):
                        str(round((stress_level_total / stress_count), 2)) + "%")
 
     @commands.command()
-    async def level(self, ctx: Context, sLevel: int):
+    async def level(self, ctx: Context, sLevel: float):
         """
         change your current stress level e.g.
         !stress level 10 (range is -100 to 999)
