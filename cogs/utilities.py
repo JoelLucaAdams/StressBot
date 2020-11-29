@@ -93,7 +93,7 @@ class Utilities(commands.Cog):
         !stress level 10 (range is -100 to 999)
         """
         name = str(ctx.author)
-        if -100.00 <= sLevel <= 1000.00:
+        if -100.00 <= sLevel <= 999.00:
             if name in stressLevels:
                 previous = str(stressLevels[name])
                 stressLevels[name] = sLevel
