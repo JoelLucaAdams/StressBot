@@ -1,6 +1,6 @@
 # StressBot
 
-A discord bot that manages stress levels through users. Created by Joel Adams engineering, inspired by Rhydian and the CompSci Community Hub.
+A discord bot that manages stress levels through users. Created by Joel Adams engineering, inspired by Rhydian and the CompSci Community Hub. This is an open source project so feel free to suggest any issues or contribute to the code / design.
 
 ## Setup
 
