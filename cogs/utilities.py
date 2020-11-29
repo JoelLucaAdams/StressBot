@@ -3,6 +3,7 @@ from discord.ext.commands import Context
 from discord import Member
 import json
 import time
+import random
 
 
 def read_json_file(filename):
@@ -44,6 +45,19 @@ def saveJson():
 
 
 stressLevels = read_json_file("stressLevels.json")
+
+
+def checkLevelForGif(stressLevel: float):
+    """
+    Checks the stress level to see if it is a special number
+    e.g. 69 returns the gif 'nice'
+    """
+    if stressLevel == 69.0:
+        return random.choice(["https://tenor.com/view/noice-nice-click-gif-8843762",
+                             "https://tenor.com/view/brooklyn99-noice-jake-peralta-andy-samberg-nice-gif-14234819"])
+    # add another elif statement below this for each numerical check and a gif you would like to respond with
+    else:
+        return 0
 
 
 class Utilities(commands.Cog):
@@ -102,6 +116,9 @@ class Utilities(commands.Cog):
                 stressLevels[name] = sLevel
                 await ctx.send(printUserLevel(name))
 
+            if checkLevelForGif(sLevel) != 0:
+                await ctx.send(checkLevelForGif(sLevel))
+
             saveJson()
         else:
             await ctx.send("Stop trying to send numbers out of range you nerd")
@@ -134,7 +151,7 @@ class Utilities(commands.Cog):
     async def maximus(self, ctx: Context):
         """
         Sets the users stress level to 999%
-        Super secret alais: reeee
+        Super secret alias: reeee
         """
         name = str(ctx.author)
         if name in stressLevels:
