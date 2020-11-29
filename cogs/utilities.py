@@ -121,7 +121,9 @@ class Utilities(commands.Cog):
 
             saveJson()
         else:
-            await ctx.send("Stop trying to send numbers out of range you nerd")
+            await ctx.send("Stop trying to send numbers out of range you nerd "
+                           "\nhttps://tenor.com/view/whats-the-number-number-please-digits-give-me-the-number-whats-my"
+                           "-number-gif-15788802")
 
     @commands.command()
     async def get(self, ctx: Context, member: Member):
