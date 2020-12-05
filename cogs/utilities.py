@@ -168,7 +168,7 @@ class Utilities(commands.Cog):
         Changes the users stress level randomly
         """
         name = str(ctx.author)
-        number = random.uniform(-100.0, 1000.0)
+        number = round(random.uniform(-100.0, 1000.0), 2)
         if name in stressLevels:
             stressLevels[name] = number
             await ctx.send(printUserLevel(name))
