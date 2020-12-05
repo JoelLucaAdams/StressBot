@@ -161,3 +161,16 @@ class Utilities(commands.Cog):
             await ctx.send("*999% stress* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n"
                            "https://tenor.com/view/jim-carrey-court-stressed-ripping-out-hair-annoyed-gif-4968054")
             saveJson()
+
+    @commands.command()
+    async def random(self, ctx: Context):
+        """
+        Changes the users stress level randomly
+        """
+        name = str(ctx.author)
+        number = random.uniform(-100.0, 1000.0)
+        if name in stressLevels:
+            stressLevels[name] = number
+            await ctx.send(printUserLevel(name))
+            checkLevelForGif(number)
+            saveJson()
