@@ -104,10 +104,10 @@ class Utilities(commands.Cog):
     async def level(self, ctx: Context, sLevel: float):
         """
         change your current stress level e.g.
-        !stress level 10 (range is -100 to 999)
+        !stress level 10 (range is -100 to 9999)
         """
         name = str(ctx.author)
-        if -100.00 <= sLevel <= 999.00:
+        if -100.00 <= sLevel <= 9999.00:
             if name in stressLevels:
                 previous = str(stressLevels[name])
                 stressLevels[name] = sLevel
