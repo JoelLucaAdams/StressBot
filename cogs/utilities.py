@@ -1,6 +1,6 @@
 from discord.ext import commands
 from discord.ext.commands import Context
-from discord import Member
+from discord import Member, HTTPException
 import json
 import time
 import random
@@ -33,7 +33,7 @@ def printUserLevel(name: str):
     Returns:
         String of the user
     """
-    return name + ' stress level is now ' + str(stressLevels[name]) + '%'
+    return f'<@{name}> stress level is now ' + str(stressLevels[name]) + '%'
 
 
 def saveJson():
@@ -94,7 +94,13 @@ class Utilities(commands.Cog):
         stress_string = ""
 
         for data in stressLevels:
-            stress_string += (printUserLevel(data) + "\n")
+            try: 
+                name = ctx.guild.get_member(int(data)).nick
+                if name is None:
+                    name = ctx.guild.get_member(int(data)).name
+            except AttributeError:
+                name = 'Not found'
+            stress_string += f'{name} stress level is now ' + str(stressLevels[data]) + '%' + '\n'
             stress_level_total += int(stressLevels[data])
             stress_count += 1
         await ctx.send(stress_string + "\nThe average stress level is " +
@@ -106,7 +112,7 @@ class Utilities(commands.Cog):
         change your current stress level e.g.
         !stress level 10 (range is -100 to 9999)
         """
-        name = str(ctx.author)
+        name = str(ctx.author.id)
         if -100.00 <= sLevel <= 9999.00:
             if name in stressLevels:
                 previous = str(stressLevels[name])
@@ -130,7 +136,7 @@ class Utilities(commands.Cog):
         """
         Parameter is username e.g. !stress get @Joel Adams#4893
         """
-        member = str(member)
+        member = str(member.id)
         if member in stressLevels:
             await ctx.send(printUserLevel(member))
         else:

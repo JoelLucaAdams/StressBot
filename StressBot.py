@@ -27,7 +27,8 @@ helpCommand = DefaultHelpCommand()
 
 bot = commands.Bot(
     command_prefix="!stress ",
-    help_command=helpCommand
+    help_command=helpCommand,
+    intents=discord.Intents.all()
 )
 
 # Setup the General cog with the help command
