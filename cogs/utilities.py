@@ -113,19 +113,21 @@ class Utilities(commands.Cog):
         !stress level 10 (range is -100 to 9999)
         """
         name = str(ctx.author.id)
+        message = ''
         if -100.00 <= sLevel <= 9999.00:
             if name in stressLevels:
                 previous = str(stressLevels[name])
                 stressLevels[name] = sLevel
-                await ctx.send(printUserLevel(name) + " (was " + previous + "%)")
+                message = printUserLevel(name) + " (was " + previous + "%)"
             else:
                 stressLevels[name] = sLevel
-                await ctx.send(printUserLevel(name))
+                message = printUserLevel(name)
 
             if checkLevelForGif(sLevel) != 0:
-                await ctx.send(checkLevelForGif(sLevel))
+                message = checkLevelForGif(sLevel)
 
             saveJson()
+            await ctx.send(message + '\n' + f'https://api.joeladams.dev/stressbot?user={name}')
         else:
             await ctx.send("Stop trying to send numbers out of range you nerd "
                            "\nhttps://tenor.com/view/whats-the-number-number-please-digits-give-me-the-number-whats-my"
@@ -138,7 +140,7 @@ class Utilities(commands.Cog):
         """
         member = str(member.id)
         if member in stressLevels:
-            await ctx.send(printUserLevel(member))
+            await ctx.send(printUserLevel(member) + '\n' + f'https://api.joeladams.dev/stressbot?user={member}')
         else:
             await ctx.send("Couldn\'t find any data for " + member)
 
